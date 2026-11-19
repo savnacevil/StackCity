@@ -1,156 +1,172 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StackCity</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>StackCity</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f5fb;--card:#fff;--ink:#1d2340;--mut:#6b7392;--acc:#6c5ce7;--m:#22c55e;--h:#ff5d73;--p:#ffb800;--s:#3b82f6}
-@media(prefers-color-scheme:dark){:root{--bg:#12152a;--card:#1d2140;--ink:#eef0ff;--mut:#9aa1c7}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:600 16px Nunito,system-ui,sans-serif}
-main{max-width:520px;margin:auto;padding:16px 14px 110px}
-h1{font-size:2.6rem;font-weight:900;margin:6px 0}h1 span{color:var(--acc)}h2,h3{margin:14px 0 6px}
-.mut{color:var(--mut);font-size:.9rem}
-.card{background:var(--card);border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 2px 0 rgba(0,0,0,.08)}
-input{width:100%;padding:11px 12px;margin:6px 0;border:2px solid rgba(128,138,180,.35);border-radius:12px;font:inherit;background:transparent;color:inherit}
-input:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:14px;padding:12px 16px;font:900 1rem Nunito,sans-serif;cursor:pointer}
-.btn.sm{padding:8px 14px}.btn.big{width:100%;font-size:1.25rem;padding:16px}.btn[disabled]{opacity:.4}.btn.ghost{background:transparent;color:var(--acc);border:2px solid var(--acc)}
-.row{display:flex;gap:8px;align-items:center}.row input{flex:1}.pl{display:flex;align-items:center;gap:10px;justify-content:space-between;margin:6px 0}
-.av{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;margin-right:8px}
+:root{--bg:#e9f1f7;--card:#fff;--ink:#16324a;--mut:#576c80;--acc:#0b8a80;--hot:#d93f4a;--m:#22c55e;--h:#ff5d73;--p:#ffb800;--s:#3b82f6;--bar:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1c2b;--card:#182b40;--ink:#eaf3fb;--mut:#8fa6ba;--bar:#182b40}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:700 16px Nunito,system-ui,sans-serif}main{max-width:520px;margin:auto;padding:0 12px 130px}
+h1{font-size:2.8rem;font-weight:900;margin:22px 0 4px}h1 span{color:var(--acc)}h2,h3{margin:14px 0 6px}.mut{color:var(--mut);font-size:.88rem}
+.card{background:var(--card);border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 2px 0 rgba(0,0,0,.07)}
+input,select{width:100%;padding:11px 12px;margin:6px 0;border:2px solid rgba(128,138,160,.35);border-radius:12px;font:inherit;background:transparent;color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:14px;padding:12px 16px;font:900 1rem Nunito,sans-serif;cursor:pointer}.btn.sm{padding:10px 14px}.btn[disabled]{opacity:.4}.btn.ghost{background:transparent;color:var(--acc);border:2px solid var(--acc)}
+.row{display:flex;gap:8px;align-items:center}.row input{flex:1}.pl{display:flex;align-items:center;gap:10px;justify-content:space-between;margin:8px 0}
+.av{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;margin-right:8px;font-size:1.1rem}
 .em{font-size:1.5rem;background:none;border:2px solid transparent;border-radius:12px;cursor:pointer}.em.on{border-color:var(--acc)}
-.top{display:flex;justify-content:space-between;align-items:center}.age{font-size:1.8rem;font-weight:900}.cash{font-size:1.5rem;font-weight:900}
-.bar{display:flex;align-items:center;gap:8px;margin:9px 0}.bar span{width:116px}.bar div{flex:1;height:12px;background:rgba(128,138,180,.25);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;transition:width .4s}
-.ev p{font-size:1.1rem;margin:0 0 10px}.ch{display:block;width:100%;margin:6px 0;background:var(--s)}
-.feed{max-height:34vh;overflow:auto}.feed p{margin:0 0 8px}.feed b{color:var(--acc);margin-right:6px}
-.chip{display:inline-block;border:2px solid;border-radius:18px;padding:4px 10px;margin:3px;font-size:.85rem}.chip i{display:block;font-style:normal;color:var(--mut);font-size:.72rem}.chip.rdy{background:rgba(34,197,94,.18)}.chip.dead{opacity:.5}
-.bb{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--card);padding:10px 14px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.12);text-align:center}
-.chat{max-height:150px;overflow:auto;font-size:.9rem}.chat b{color:var(--acc)}
-#banner{background:var(--h);color:#fff;border-radius:12px;padding:10px;margin:8px 0}.sc{font-size:1.4rem}
+#tbar{position:sticky;top:0;height:7px;background:rgba(0,0,0,.1);z-index:20;margin:0 -12px}#tfill{display:block;height:100%;background:var(--hot);transition:width .25s linear}
+.hero{background:var(--acc);color:#fff;border-radius:0 0 28px 28px;margin:0 -12px;padding:18px 16px;display:flex;align-items:center;gap:12px}
+.hero .av{width:58px;height:58px;font-size:2rem;margin:0;background:#fff3}.hi{flex:1}.hn{font-size:1.3rem;font-weight:900}.hj{opacity:.9;font-size:.9rem}.hm{text-align:right}.cash{font-size:1.4rem;font-weight:900}.agep{background:#fff3;border-radius:20px;padding:2px 12px;display:inline-block;font-weight:900}
+.bars{display:flex;gap:8px;margin:12px 0}.sb{flex:1;background:var(--card);border-radius:14px;padding:8px 10px}.sb b{font-size:.82rem}.sb div{height:8px;border-radius:6px;background:rgba(128,138,160,.25);margin-top:6px;overflow:hidden}.sb i{display:block;height:100%;transition:width .4s}
+.yr{background:var(--card);border-radius:18px;padding:12px 14px;margin:10px 0;animation:pop .35s}.yr h4{margin:0 0 4px;color:var(--acc)}.yr p{margin:7px 0}@keyframes pop{from{transform:translateY(12px) scale(.98);opacity:0}}
+.ev{border:3px solid var(--hot)}.ev p{font-size:1.1rem;margin:0 0 10px}.ch{display:block;width:100%;margin:8px 0;padding:14px;font-size:1.02rem}.c0{background:#0b8a80}.c1{background:#2563eb}.c2{background:#7c3aed}.c3{background:#c2410c}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:520px;display:grid;grid-template-columns:1fr 1fr 1.25fr 1fr 1fr;align-items:end;background:var(--bar);padding:6px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -6px 20px rgba(0,0,0,.14);z-index:45}
+.nav button{background:none;border:0;font:800 1.4rem Nunito;color:var(--ink);padding:6px 0;cursor:pointer}.nav button span{display:block;font-size:.7rem;color:var(--mut)}
+.nav .age-btn{background:var(--hot);color:#fff;border-radius:50%;width:76px;height:76px;margin:-34px auto 0;box-shadow:0 6px 16px rgba(255,107,107,.55);font-size:1.5rem}.age-btn span{color:#fff!important;font-size:.8rem!important}.age-btn[disabled]{opacity:.55}
+.sheet{position:fixed;inset:0;background:rgba(8,18,28,.55);z-index:40;display:flex;align-items:flex-end}.sh{background:var(--bg);width:100%;max-width:520px;margin:auto;max-height:80vh;overflow:auto;border-radius:24px 24px 0 0;padding:14px 14px 110px}.x{background:none;border:0;font-size:1.3rem;color:var(--ink)}
+.bub{position:fixed;right:14px;bottom:112px;width:54px;height:54px;border-radius:50%;border:0;background:var(--s);color:#fff;font-size:1.5rem;z-index:60;box-shadow:0 6px 16px rgba(0,0,0,.3)}.bub.ping::after{content:"";position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;background:var(--hot);border:2px solid #fff}
+.pan{position:fixed;right:12px;bottom:176px;width:min(92vw,340px);max-height:58vh;background:var(--card);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:70;display:flex;flex-direction:column;padding:12px}.chat{flex:1;overflow:auto;min-height:80px;max-height:26vh;font-size:.9rem;margin:6px 0}.chat b{color:var(--acc)}
+#banner{background:var(--hot);color:#fff;border-radius:12px;padding:10px;margin:8px 0}.sc{font-size:1.4rem}.chip{display:inline-block;border:2px solid;border-radius:16px;padding:2px 8px;margin:2px;font-size:.78rem}.chip.rdy{background:rgba(34,197,94,.2)}.chip.dead{opacity:.5}
+.rb{height:8px;border-radius:6px;background:rgba(128,138,160,.25);width:90px;overflow:hidden}.rb i{display:block;height:100%;background:var(--hot)}
 </style></head><body><main>
 <div id="banner" hidden></div>
 <section id="s-lobby"><h1>Stack<span>City</span></h1><p class="mut">Live a whole life with your friends. Stack cash. Ruin each other.</p>
 <div class="card"><b>Your name</b><input id="name" maxlength="20" placeholder="Pick a name"><div id="emojis"></div></div>
-<div class="card"><b>Host a party</b><input id="pname" maxlength="30" placeholder="Party name"><label class="mut">Game length: <b id="lenv">40</b> years</label><input id="len" type="range" min="10" max="80" step="5" value="40"><button class="btn" id="mk">Host party</button></div>
+<div class="card"><b>Host a party</b><input id="pname" maxlength="30" placeholder="Party name"><label class="mut">Game length: <b id="lenv">40</b> years</label><input id="len" type="range" min="10" max="80" step="5" value="40"><label class="mut">Seconds per year</label><select id="secs"><option>15</option><option selected>20</option><option>25</option></select><button class="btn" id="mk">Host party</button></div>
 <h3>Open parties</h3><div id="plist" class="card mut">Loading…</div></section>
-<section id="s-room" hidden><h2 id="rname"></h2><div id="rplayers" class="card"></div>
-<div class="row"><button class="btn" id="start">Start game</button><button class="btn ghost" id="leave">Leave</button></div><h3>Party chat</h3><div id="slot-room"></div></section>
-<section id="s-game" hidden><div class="card top"><div><div class="mut" id="jobl"></div><div class="age" id="agel"></div></div><div class="cash" id="cash"></div></div>
-<div class="card" id="bars"></div><div id="evc" class="card ev" hidden></div><div class="card feed" id="feed"></div><div class="card" id="roster"></div>
-<h3>Party chat</h3><div id="slot-game"></div>
-<div class="bb"><button class="btn big" id="next">Next year</button><div id="cd" class="mut"></div></div></section>
+<section id="s-room" hidden><h2 id="rname"></h2><div id="rplayers" class="card"></div><div class="row"><button class="btn" id="start">Start game</button><button class="btn ghost" id="leave">Leave</button><button class="btn ghost" id="cancel">Cancel party</button></div><p class="mut">Tap the 💬 bubble to chat.</p></section>
+<section id="s-game" hidden><div id="tbar"><i id="tfill"></i></div>
+<div class="hero"><div class="av" id="hav"></div><div class="hi"><div class="hn" id="hname"></div><div class="hj" id="hjob"></div></div><div class="hm"><div class="cash" id="cash"></div><div class="agep" id="agel"></div></div></div>
+<div class="bars" id="bars"></div><div id="evc" class="card ev" hidden></div><div id="feed"></div>
+<nav class="nav"><button data-t="job">💼<span>Job</span></button><button data-t="assets">🏠<span>Assets</span></button><button id="next" class="age-btn">⏩<span id="nxt">Age up</span></button><button data-t="rel">❤️<span>People</span></button><button data-t="act">🎯<span>Do</span></button></nav>
+<div id="sheet" class="sheet" hidden><div class="sh"><div class="pl"><h3 id="sht" style="margin:0"></h3><button class="x" id="shx" aria-label="Close">✕</button></div><div id="shb"></div></div></div></section>
 <section id="s-end" hidden><h2>Final scores</h2><div id="rank"></div><div class="card" id="obit"></div><button class="btn" id="home">Back to lobby</button></section>
-<div id="chatwrap"><div id="chat" class="chat card"></div><div class="row"><input id="cin" maxlength="280" placeholder="Say something"><button class="btn sm" id="csend">Send</button></div></div>
 </main>
+<button id="bub" class="bub" aria-label="Party chat" hidden>💬</button>
+<div id="pan" class="pan" hidden><div id="pplayers"></div><div id="chat" class="chat"></div><div class="row"><input id="cin" maxlength="280" placeholder="Say something"><button class="btn sm" id="csend">Send</button></div><div class="row" style="margin-top:8px"><button class="btn sm ghost" id="pleave">Leave game</button><button class="btn sm ghost" id="pend" hidden>End for all</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="config.js"></script><script src="events.js"></script>
 <script>
 const C=window.STACKCITY,$=s=>document.querySelector(s),LS=localStorage;
 const EM=['😎','🤠','🦊','🐸','👽','🤖','🧙','🦄'],COL=['#6c5ce7','#e17055','#00b894','#0984e3','#fd79a8','#fdcb6e','#d63031','#00cec9'];
-let sb,me,party,players=[],st,ch,ev,lastY=-1,flipping=false,emoji=+LS.emoji||0;
-const clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,v)),money=n=>(n<0?'-$':'$')+Math.abs(Math.round(n)).toLocaleString();
+let sb,me,party,players=[],st,ch,ev,dq,tab,lastY=-1,flipping=false,rdyY=-1,emoji=+LS.emoji||0,seenC=new Set(),lastC=0,lastFlip=-1,claiming=0;
+const r=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),rnd=a=>a[Math.floor(Math.random()*a.length)],clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,v)),money=n=>(n<0?'-$':'$')+Math.abs(Math.round(n)).toLocaleString();
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const show=id=>document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id),say=m=>{$('#banner').textContent=m;$('#banner').hidden=!m};
-const run=q=>q.then(r=>{if(r&&r.error)say(r.error.message);return r}),mine=()=>players.find(p=>p.user_id===me),key=()=>({party_id:party.id,user_id:me});
-const fresh=()=>({age:0,m:500,h:80,p:70,s:50,inc:0,job:'Baby',seen:[],log:[]});
-const ensure=()=>{if(!st)st=LS['st'+party.id]?JSON.parse(LS['st'+party.id]):fresh()};
+const show=id=>document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id),warn=m=>{$('#banner').textContent=m;$('#banner').hidden=!m};
+const run=q=>q.then(x=>{if(x&&x.error)warn(x.error.message);return x}),mine=()=>players.find(p=>p.user_id===me),key=()=>({party_id:party.id,user_id:me}),nm=()=>$('#name').value.trim().slice(0,20);
+const NN=()=>rnd([...NAMES.f,...NAMES.m]);
+function tok(k){const c=st.cast;return c[k]&&c[k].n}
+function fill(t){let ok=1;const o=t.replace(/\{(\w+)\}/g,(m,k)=>{const v=tok(k);if(!v)ok=0;return v||''});return ok?o:null}
+const say2=t=>fill(t)||t.replace(/\{(\w+)\}/g,'a friend');
+function fx(o){for(const k in o){const v=o[k];if(k==='job'){st.job=v;if(v&&v!=='Student')st.hadJob=true;if(!v||v==='Student'||v==='Retired')delete st.cast.boss}else if(k==='edu')st.edu=v;else if(k==='inc')st.inc=v;else if(k==='incd')st.inc+=v;else if(k==='m')st.m+=v;else st[k]=clamp(st[k]+v)}}
+function birth(){const tier=(x=>x<20?0:x<50?1:x<80?2:x<95?3:4)(r(0,99)),tr=[];while(tr.length<2){const t=rnd(TALENTS);if(!tr.includes(t))tr.push(t)}
+ st={age:-1,m:0,h:r(55,80),p:r(50,80),s:r(40,65),inc:0,job:null,edu:'',lic:false,car:false,tier,traits:tr.map(t=>t[0]),used:{},log:[],seen:[],cast:{mom:{n:rnd(NAMES.f),rel:'Mom',c:70}}};
+ tr.forEach(t=>fx(t[1]));if(r(1,10)<=7)st.cast.dad={n:rnd(NAMES.m),rel:'Dad',c:60};for(let i=1,n=r(0,2);i<=n;i++)st.cast['sib'+i]={n:NN(),rel:'Sibling',c:50}}
+const ensure=()=>{if(!st){const raw=LS['st'+party.id];if(raw)st=JSON.parse(raw);else birth()}};
 const save=()=>{if(party&&st){LS['st'+party.id]=JSON.stringify(st);run(sb.from('player_private').upsert({...key(),state:st}))}};
-const nm=()=>$('#name').value.trim().slice(0,20);
-function drawEm(){$('#emojis').innerHTML=EM.map((e,i)=>`<button class="em ${i===emoji?'on':''}" data-e="${i}">${e}</button>`).join('')}
-async function init(){
- if(!C||C.SUPABASE_URL.includes('YOUR-'))return say('Open config.js and paste your Supabase URL and anon key.');
- sb=supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY);
- let s=(await sb.auth.getSession()).data.session;
- if(!s){const r=await sb.auth.signInAnonymously();if(r.error)return say('Turn on anonymous sign-ins in Supabase (Authentication > Sign In / Providers). '+r.error.message);s=r.data.session}
- me=s.user.id;$('#name').value=LS.name||'';drawEm();show('s-lobby');run(sb.rpc('cleanup_stale'));lobby();
- setInterval(()=>{if(!$('#s-lobby').hidden)lobby()},4000);setInterval(host,1000);
- if(LS.party){const{data:p}=await sb.from('parties').select('id,status').eq('id',LS.party).maybeSingle();p&&p.status!=='ended'?enter(p.id):delete LS.party}}
-async function lobby(){const{data}=await sb.from('parties').select('id,name,end_age,players(count)').eq('status','lobby').order('created_at',{ascending:false}).limit(20);
- $('#plist').innerHTML=(data||[]).map(p=>`<div class="pl"><div><b>${esc(p.name)}</b><div class="mut">${p.players[0].count}/8 players, ${p.end_age} years</div></div><button class="btn sm" data-j="${p.id}">Join</button></div>`).join('')||'No open parties yet. Host one!'}
-async function join(id){const n=nm();if(!n)return say('Pick a name first.');LS.name=n;
- const{data:pl}=await sb.from('players').select('user_id').eq('party_id',id);
- if(pl.length>=8&&!pl.some(x=>x.user_id===me))return say('That party is full.');
- const{error}=await sb.from('players').upsert({party_id:id,user_id:me,name:n,emoji:EM[emoji],color:COL[emoji]});
- if(error)return say(error.message);say('');enter(id)}
-async function enter(id){LS.party=id;party=(await sb.from('parties').select('*').eq('id',id).single()).data;
- ch=sb.channel('p'+id).on('postgres_changes',{event:'*',schema:'public',table:'parties',filter:'id=eq.'+id},x=>{if(x.eventType==='DELETE')return leave(true);party=x.new;route()})
- .on('postgres_changes',{event:'*',schema:'public',table:'players',filter:'party_id=eq.'+id},loadPlayers)
- .on('postgres_changes',{event:'INSERT',schema:'public',table:'chat',filter:'party_id=eq.'+id},x=>addChat(x.new)).subscribe();
- const{data:c}=await sb.from('chat').select('*').eq('party_id',id).order('id').limit(50);$('#chat').innerHTML='';(c||[]).forEach(addChat);
- await loadPlayers();route()}
-async function loadPlayers(){const{data}=await sb.from('players').select('*').eq('party_id',party.id).order('joined_at');players=data||[];draw()}
-function route(){if(!party)return;
- if(party.status==='lobby'){show('s-room');$('#slot-room').append($('#chatwrap'))}
- else if(party.status==='playing'){show('s-game');$('#slot-game').append($('#chatwrap'));ensure();tickYear()}
- else{show('s-end');ensure();finalize()}
- draw()}
-function tickYear(){if(st.dead)lastY=party.year;else{
- if(!ev&&st.ev)ev=EVENTS.find(e=>e.id===st.ev);
- if(party.year!==lastY){lastY=party.year;if(st.age!==party.year||!st.log.length)newYear(party.year)}}
- save();drawGame()}
-const log=t=>{st.log.unshift({y:st.age,t});st.log.length=Math.min(st.log.length,60)};
-function fx(o){for(const k in o){if(k==='job')st.job=o[k];else if(k==='inc')st.inc=o[k];else if(k==='m')st.m+=o[k];else st[k]=clamp(st[k]+o[k])}}
-function pick(y){const ok=e=>y>=e.a[0]&&y<=e.a[1]&&!st.seen.includes(e.id)&&(!e.if||e.if(st));
- const must=EVENTS.filter(e=>e.must&&ok(e));if(must.length)return must[0];
- const pool=EVENTS.filter(e=>!e.must&&ok(e));return pool.length&&Math.random()<.85?pool[Math.floor(Math.random()*pool.length)]:null}
-function newYear(y){st.age=y;const L=[];
- if(y>0){const col=y>=18&&st.job!=='Student'?12000:0;st.m+=st.inc-col;if(st.inc||col)L.push(`Earned ${money(st.inc)}, living costs ${money(col)}.`);if(y>45)st.h=clamp(st.h-Math.ceil((y-45)/12))}
- const w=party.world;if(w&&w.y===y&&WORLD[w.i]){const e=WORLD[w.i];fx(e.fx);L.push((e.abs?'🛸 ':'🌍 ')+e.t)}
- ev=pick(y);st.ev=ev&&ev.id;if(ev)st.seen.push(ev.id);
- if(!ev&&!L.length)L.push(y<5?'You were a baby. Impressive.':'A quiet year. Suspicious.');
- L.forEach(log);if(y===0)log('👶 Born in StackCity. Everyone starts equal. It won\'t last.');
- if(st.h<=0)die('poor health');pub()}
-function pickChoice(i){const c=ev.c[i];let f=c[1],t=c[2];if(c[3]&&Math.random()<c[3][0]){f=c[3][1];t=c[3][2]}
- fx(f);log(ev.t+'\n→ '+c[0]+': '+t);ev=null;st.ev=null;if(st.h<=0)die('poor health');pub();save();drawGame()}
-function die(c){if(st.dead)return;st.dead=true;st.cause=c;log('💀 You died ('+c+'). You are now a ghost.');run(sb.from('players').update({alive:false,ready:true}).match(key()))}
-function pub(){const w=st.m*(.7+Math.random()*.6),t=w<0?'in debt':w<5e3?'broke':w<5e4?'$':w<3e5?'$$':w<2e6?'$$$':'$$$$';
- run(sb.from('players').update({pub:{age:st.age,job:st.job,wealth:t}}).match(key()))}
-const ready=()=>run(sb.from('players').update({ready:true}).match(key()));
-function host(){if(!party||party.status!=='playing'||!st)return;
- const a=players.filter(p=>p.alive),any=a.some(p=>p.ready),all=a.every(p=>p.ready),m=mine();
- const left=party.deadline?Math.ceil((new Date(party.deadline)-Date.now())/1000):null;
- $('#cd').textContent=left===null?'':left>0?`Auto-pick in ${left}s`:'Time!';
- if(left!==null&&left<=0&&!st.dead){if(ev)pickChoice(0);else if(m&&!m.ready)ready()}
- if(party.host_id===me&&!flipping){
-  if(any&&!party.deadline){party.deadline=new Date(Date.now()+60000).toISOString();run(sb.from('parties').update({deadline:party.deadline}).eq('id',party.id))}
-  if(a.length&&(all||(left!==null&&left<-2)))flip()}}
-async function flip(){flipping=true;const y=party.year+1;
- if(y>=party.end_age)await sb.from('parties').update({status:'ended',year:y}).eq('id',party.id);
- else{let w=party.world||{};if(Math.random()<.3){const abs=Math.random()<.12,l=WORLD.map((e,i)=>[e,i]).filter(([e])=>!!e.abs===abs);w={y,i:l[Math.floor(Math.random()*l.length)][1]}}
-  await sb.from('players').update({ready:false}).eq('party_id',party.id).eq('alive',true);
-  await sb.from('parties').update({year:y,deadline:null,world:w}).eq('id',party.id)}
+const addLine=t=>{if(!st.log[0]||st.log[0].y!==st.age)st.log.unshift({y:st.age,lines:[]});st.log[0].lines.push(t);st.log.length=Math.min(st.log.length,40)};
+function pub(){const w=st.m*(.7+Math.random()*.6),t=w<0?'in debt':w<5e3?'broke':w<5e4?'$':w<3e5?'$$':w<2e6?'$$$':'$$$$';run(sb.from('players').update({pub:{age:st.age,job:st.job||'Unemployed',wealth:t}}).match(key()))}
+const commit=()=>{pub();save();drawGame()};
+function pick(y){const ok=e=>y>=e.a[0]&&y<=e.a[1]&&!st.seen.includes(e.id)&&(!e.if||e.if(st));const must=EVENTS.filter(e=>e.must&&ok(e));if(must.length)return must[0];
+ const pool=EVENTS.filter(e=>!e.must&&ok(e));return pool.length&&Math.random()<.8?rnd(pool):null}
+function newYear(y){st.age=y;st.used={};dq=null;st.log.unshift({y,lines:[]});
+ if(y===0){addLine(`👶 You were born to ${st.cast.mom.n}${st.cast.dad?' and '+st.cast.dad.n:' (a single-parent home)'}.`);addLine(`🏠 Family: ${TIERS[st.tier]}. Traits: ${st.traits.join(', ')}.`)}
+ else{const kid=y<18,col=!kid&&st.job!=='Student'?12000:0;st.m+=st.inc-col;
+  if(st.inc)addLine(`💼 Your ${st.job} gig paid ${money(st.inc)}.`);if(col)addLine(st.inc?`🏠 Living costs took ${money(col)}.`:`😬 Rent is due and you have no job. Try the Job tab.`);
+  if(y>45)st.h=clamp(st.h-Math.ceil((y-45)/12));const al=y>=8&&y<18?[0,100,300,800,3000][st.tier]:0;if(al){st.m+=al;if(y===8)addLine(`💵 ${st.cast.mom.n} started giving you an allowance.`)}}
+ if(y>=5&&y<=17){st.cast.teacher={n:rnd(NAMES.t),rel:'Teacher',c:30};if(y===5){st.cast.bff={n:NN(),rel:'Best friend',c:60};addLine(`🏫 School starts! ${st.cast.teacher.n} is your teacher and you met ${st.cast.bff.n}.`)}}
+ if(y===14)addLine("💼 You can get a part-time job now (Job tab).");if(y===16)addLine("🚗 You turned 16! Time for the driver's test (Do tab).");
+ if(y===18){delete st.cast.teacher;addLine("🎓 You're an adult. Rent, taxes, and regret begin.");const g=[0,0,0,20000,150000][st.tier];if(g){st.m+=g;addLine(`🎁 Your family gifted you ${money(g)}.`)}}
+ if(y===21)addLine("🍸 Gambling is now legal for you. Poor decisions are now legal.");if(y===65)addLine("🧓 Retirement age. Your knees have opinions.");
+ const w=party.world;if(w&&w.y===y&&WORLD[w.i]){const wf={...WORLD[w.i].fx};if(y<18)delete wf.m;fx(wf);addLine((WORLD[w.i].abs?'🛸 ':'🌍 ')+WORLD[w.i].t)}
+ const pool=LINES.filter(l=>y>=l[0]&&y<=l[1]).map(l=>fill(l[2])).filter(Boolean);for(let i=r(2,3);i>0&&pool.length;i--)addLine(pool.splice(r(0,pool.length-1),1)[0]);
+ ev=pick(y);st.ev=ev&&ev.id;if(ev)st.seen.push(ev.id);if(st.h<=0)die('poor health');commit()}
+function pickChoice(i){const c=ev.c[i];let f=c[1],t=c[2];if(c[3]&&Math.random()<c[3][0]){f=c[3][1];t=c[3][2]}fx(f);addLine('🎲 '+say2(ev.t));addLine('→ '+c[0]+': '+say2(t));ev=null;st.ev=null;if(st.h<=0)die('poor health');commit()}
+const news=t=>{if(party)run(sb.from('chat').insert({party_id:party.id,user_id:me,name:'📰',body:(LS.name||'Someone')+' '+t}))};
+function die(c){if(st.dead)return;st.dead=true;st.cause=c;ev=null;st.ev=null;news('died ('+c+'). 💀');addLine('💀 You died ('+c+'). You are now a ghost.');run(sb.from('players').update({alive:false,ready:true}).match(key()))}
+function apply(i){const x=JOBS[i];if(x.edu&&st.edu!==x.edu)addLine(`❌ ${x.t} needs ${x.edu==='college'?'a college degree':'trade school'}.`);
+ else if(Math.random()*100<clamp(45+(st.s-x.s)*1.2+(st.traits.some(t=>t.startsWith('Charming'))?10:0),5,90)){st.job=x.t;st.inc=x.inc;st.hadJob=true;st.cast.boss={n:NN(),rel:'Boss',c:40};addLine(`🎉 You got hired as a ${x.t}! Your boss is ${st.cast.boss.n}.`);news('got hired as a '+x.t+'. 💼')}
+ else addLine(`😔 Your ${x.t} application was rejected. They "went with someone else."`);commit()}
+const cst=x=>st.age<18&&x.id==='doc'?0:x.cost;
+function doAct(id){const x=ACTS.find(a=>a.id===id);if(st.m<cst(x)||(x.once&&st.used[id]))return;st.m-=cst(x);st.used[id]=1;fx(x.fx||{});addLine(say2(x.say));
+ if(x.win&&Math.random()<x.win[0]){st.m+=x.win[1];addLine('🎉 '+x.win[2]);if(x.win[1]>=1000)news('won '+money(x.win[1])+'! 🎰')}else if(x.win)fx({p:-2});commit()}
+function startTest(){const c=st.age<18?0:50;if(st.m<c)return;st.m-=c;st.dtY=st.age;const q=rnd(DRIVE);dq={q:q[0],o:q[1].map((t,i)=>({t,ok:i===0})).sort(()=>Math.random()-.5)};renderSheet()}
+function answer(i){const ok=dq.o[i].ok;dq=null;if(ok){st.lic=true;fx({p:10});news("passed the driver's test! 🪪");addLine(`🪪 You passed the driver's test! ${st.cast.dad?st.cast.dad.n:st.cast.mom.n} is "totally not nervous" about you driving.`)}else{fx({p:-3});news("failed the driver's test. 🚫");addLine("🚫 You failed the driver's test. The examiner sighed. Retry next year.")}commit()}
+function renderSheet(){if($('#sheet').hidden)return;const b=$('#shb'),T={job:'💼 Job',assets:'🏠 Assets',rel:'❤️ People',act:'🎯 Do something'};$('#sht').textContent=T[tab];let h='';
+ if(tab==='job'){const work=st.job&&!['Student','Retired'].includes(st.job);h=`<div class="card"><b>${st.job?esc(st.job):'Unemployed'}</b><div class="mut">${st.job?money(st.inc)+'/yr'+(st.cast.boss?' · Boss: '+esc(st.cast.boss.n):''):'No job, no income.'}</div>${work?'<button class="btn sm" data-q="1">Quit</button>':''}</div>`;
+  if(!['Student','Retired'].includes(st.job))h+=JOBS.map((x,i)=>st.age>=x.min?`<div class="card pl"><div><b>${x.t}</b><div class="mut">${money(x.inc)}/yr${x.edu?' · needs '+x.edu:''}${x.s?' · Smarts '+x.s+'+':''}</div></div><button class="btn sm" data-ap="${i}">Apply</button></div>`:'').join('')||'<p class="mut">Nobody is hiring kids under 14.</p>'}
+ else if(tab==='assets')h=`<div class="card"><b>🪪 Driver's license</b><div class="mut">${st.lic?'Yes':'Not yet'}</div></div><div class="card pl"><div><b>🚗 Car</b><div class="mut">${st.car?'Owned':'None'}</div></div>${st.car?'<button class="btn sm" data-car="s">Sell (+$3,000)</button>':st.lic?'<button class="btn sm" data-car="b">Buy used ($6,000)</button>':'<span class="mut">Need a license</span>'}</div><div class="card"><b>🏦 Net worth: ${money(st.m+(st.car?3000:0))}</b><div class="mut">Family: ${TIERS[st.tier]}</div></div><div class="card"><b>🎯 Life goals</b>${[['🪪 Get your license',st.lic],['💼 Land a job',st.hadJob],['🎓 Finish school',st.edu&&st.job!=='Student'],['🚗 Own a car',st.car],['💰 Save $100,000',st.m>=1e5]].map(g=>`<div>${g[1]?'✅':'⬜'} ${g[0]}</div>`).join('')}</div>`;
+ else if(tab==='rel')h=Object.entries(st.cast).map(([k,c])=>`<div class="card pl"><div><b>${esc(c.n)}</b><div class="mut">${c.rel}</div><div class="rb"><i style="width:${c.c}%"></i></div></div><button class="btn sm" data-sp="${k}" ${st.used['r'+k]?'disabled':''}>Spend time</button></div>`).join('');
+ else if(dq)h=`<div class="card"><b>🚗 Driver's test</b><p>${esc(dq.q)}</p>${dq.o.map((o,i)=>`<button class="btn ch c${i}" data-an="${i}">${esc(o.t)}</button>`).join('')}</div>`;
+ else{if(st.age>=16&&!st.lic)h+=`<div class="card pl"><div><b>🚗 Driver's test</b><div class="mut">${st.age<18?'Parents pay':'$50'} · one question</div></div><button class="btn sm" data-dt="1" ${st.dtY===st.age||st.m<(st.age<18?0:50)?'disabled':''}>Take it</button></div>`;
+  h+=ACTS.filter(a=>st.age>=a.min).map(a=>`<div class="card pl"><div><b>${a.e} ${a.t}</b><div class="mut">${cst(a)?money(cst(a)):'Free'}${a.once?' · once a year':''}</div></div><button class="btn sm" data-a="${a.id}" ${st.m<cst(a)||(a.once&&st.used[a.id])?'disabled':''}>Go</button></div>`).join('')}
+ b.innerHTML=h}
+const open=t=>{tab=t;$('#sheet').hidden=false;renderSheet()},closeSheet=()=>{$('#sheet').hidden=true};
+function drawGame(){if(!st)return;const m=mine();$('#hav').textContent=m?m.emoji:'🙂';$('#hname').textContent=st.dead?'👻 '+LS.name:LS.name;$('#hjob').textContent=st.age<0?'':(st.job||(st.age<5?'Baby':st.age<18?'Student':'Unemployed'));
+ $('#agel').textContent='Age '+Math.max(0,st.age);$('#cash').textContent=money(st.m);$('#cash').style.color=st.m<0?'#ffd0d0':'#fff';
+ $('#bars').innerHTML=[['❤️','h'],['😊','p'],['🧠','s']].map(([l,k])=>`<div class="sb"><b>${l} ${st[k]}</b><div><i style="width:${st[k]}%;background:var(--${k})"></i></div></div>`).join('');
+ $('#feed').innerHTML=st.log.map(x=>`<div class="yr"><h4>Age ${x.y}</h4>${x.lines.map(l=>`<p>${esc(l).replace(/\n/g,'<br>')}</p>`).join('')}</div>`).join('');
+ const e=$('#evc');e.hidden=!ev;if(ev)e.innerHTML=`<p>${esc(say2(ev.t))}</p>`+ev.c.map((c,i)=>`<button class="btn ch c${i}" data-i="${i}">${esc(c[0])}</button>`).join('');renderSheet();draw()}
+function tickYear(){if(st.dead)lastY=party.year;else{if(!ev&&st.ev)ev=EVENTS.find(e=>e.id===st.ev);if(party.year!==lastY){lastY=party.year;closeSheet();{for(let y=st.age+1;y<party.year&&!st.dead;y++){newYear(y);if(ev)pickChoice(0)}if(!st.dead&&(st.age!==party.year||!st.log.length))newYear(party.year)}}}save();drawGame()}
+function tick(){if(!party||party.status!=='playing'||!st)return;const a=players.filter(p=>p.alive),all=a.length&&a.every(p=>p.ready),m=mine(),secs=party.secs||20,left=party.deadline?(new Date(party.deadline)-Date.now())/1000:null;
+ $('#tfill').style.width=left===null?'0':clamp(left/secs*100)+'%';$('#nxt').textContent=!m||!m.alive?'Ghost':m.ready?'Waiting':ev?'Choose!':left>0?Math.ceil(left)+'s':'Age up';
+ $('#next').disabled=!m||!m.alive||m.ready||!!ev;
+ if(left!==null&&left<=0&&!st.dead&&m&&!m.ready&&rdyY!==party.year){rdyY=party.year;closeSheet();if(ev)pickChoice(0);ready()}
+ if(party.host_id===me&&!flipping&&players.length&&lastFlip!==party.year){if(!a.length)end();else if(all||(left!==null&&left<-1.5))flip()}
+ else if(party.host_id!==me&&left!==null&&left<-9&&!claiming){claiming=1;run(sb.rpc('claim_host',{p:party.id})).then(()=>setTimeout(()=>{claiming=0},8000))}}
+async function finalizeAll(){const{data}=await sb.from('player_private').select('user_id,state').eq('party_id',party.id);for(const x of data||[]){const p=players.find(q=>q.user_id===x.user_id);if(p&&!(p.pub&&p.pub.final)&&x.state&&x.state.m!==undefined)await sb.from('players').update({pub:{...p.pub,final:{m:x.state.m,h:x.state.h,p:x.state.p,s:x.state.s}}}).match({party_id:party.id,user_id:x.user_id})}}
+const ready=()=>{closeSheet();run(sb.from('players').update({ready:true}).match(key()))},end=async()=>{await finalizeAll();await sb.from('parties').update({status:'ended'}).eq('id',party.id)};
+async function flip(){flipping=true;lastFlip=party.year;const y=party.year+1,secs=party.secs||20;
+ if(y>=party.end_age){await finalizeAll();await sb.from('parties').update({status:'ended',year:y}).eq('id',party.id)}
+ else{let w={};if(Math.random()<.3){const abs=Math.random()<.12,l=WORLD.map((e,i)=>[e,i]).filter(([e])=>!!e.abs===abs);w={y,i:rnd(l)[1]}}
+  await sb.from('players').update({ready:false}).eq('party_id',party.id).eq('alive',true);await sb.from('parties').update({year:y,deadline:new Date(Date.now()+secs*1000).toISOString(),world:w}).eq('id',party.id);players.forEach(p=>{if(p.alive)p.ready=false})}
  flipping=false}
-function drawGame(){if(!st)return;
- $('#agel').textContent='Age '+st.age;$('#jobl').textContent=st.dead?'Ghost 👻':st.job;
- $('#cash').textContent=money(st.m);$('#cash').style.color=st.m<0?'var(--h)':'var(--m)';
- $('#bars').innerHTML=[['❤️ Health','h'],['😊 Happiness','p'],['🧠 Smarts','s']].map(([l,k])=>`<div class="bar"><span>${l}</span><div><i style="width:${st[k]}%;background:var(--${k})"></i></div><b>${st[k]}</b></div>`).join('');
- $('#feed').innerHTML=st.log.map(x=>`<p><b>${x.y}</b>${esc(x.t).replace(/\n/g,'<br>')}</p>`).join('');
- const e=$('#evc');e.hidden=!ev;if(ev)e.innerHTML=`<p>${esc(ev.t)}</p>`+ev.c.map((c,i)=>`<button class="btn ch" data-i="${i}">${esc(c[0])}</button>`).join('');
- draw()}
-function draw(){if(!party)return;const m=mine();
- $('#rname').textContent=party.name+' ('+party.end_age+' years)';
- $('#rplayers').innerHTML=players.map(p=>`<div class="pl"><span><span class="av" style="background:${p.color}">${p.emoji}</span>${esc(p.name)}${p.user_id===party.host_id?' 👑':''}</span></div>`).join('');
- $('#start').hidden=party.host_id!==me;
- $('#roster').innerHTML=players.map(p=>`<span class="chip ${p.ready?'rdy':''} ${p.alive?'':'dead'}" style="border-color:${p.color}">${p.emoji} ${esc(p.name)}<i>${p.alive?esc((p.pub.job||'Baby')+' '+(p.pub.wealth||'')):'ghost 👻'}</i></span>`).join('');
- const b=$('#next');b.disabled=!m||!m.alive||m.ready||!!ev||!st;
- b.textContent=!m?'':!m.alive?'You are a ghost 👻':m.ready?'Waiting for others…':ev?'Make your choice first':'Next year';
+function draw(){if(!party)return;$('#rname').textContent=party.name+' ('+party.end_age+' years)';
+ $('#rplayers').innerHTML=players.map(p=>`<div class="pl"><span><span class="av" style="background:${p.color}">${p.emoji}</span>${esc(p.name)}${p.user_id===party.host_id?' 👑':''}</span></div>`).join('');$('#start').hidden=$('#cancel').hidden=party.host_id!==me;$('#leave').hidden=party.host_id===me;$('#pend').hidden=party.host_id!==me||party.status!=='playing';$('#pleave').hidden=party.status!=='playing';
+ $('#pplayers').innerHTML=players.map(p=>`<span class="chip ${p.ready?'rdy':''} ${p.alive?'':'dead'}" style="border-color:${p.color}">${p.emoji} ${esc(p.name)} · ${p.alive?esc((p.pub.job||'')+' '+(p.pub.wealth||'')):'ghost 👻'}</span>`).join('');
  if(party.status==='ended')rank()}
 const score=f=>Math.round(clamp(20*Math.log10(1+Math.max(0,f.m)/1000))+f.h+f.p+f.s);
 async function finalize(){if(!st||st.fin)return;st.fin=1;const m=mine();await sb.from('players').update({pub:{...(m?m.pub:{}),final:{m:st.m,h:st.h,p:st.p,s:st.s}}}).match(key())}
-function rank(){const r=players.map(p=>({p,f:p.pub&&p.pub.final})).sort((a,b)=>(b.f?score(b.f):-1)-(a.f?score(a.f):-1));
- $('#rank').innerHTML=r.map((x,i)=>`<div class="card pl"><span><b>${i+1}.</b> <span class="av" style="background:${x.p.color}">${x.p.emoji}</span><b>${esc(x.p.name)}</b>${x.f?`<div class="mut">${money(x.f.m)}  ❤️${x.f.h} 😊${x.f.p} 🧠${x.f.s}</div>`:'<div class="mut">waiting…</div>'}</span><b class="sc">${x.f?score(x.f):'…'}</b></div>`).join('');
- const m=mine();if(st&&m){const n=esc(m.name),r2=st.m>2e5?'a very attentive tax lawyer':st.m>0?'a modest savings account and unresolved opinions':'creditors, who will attend';
-  $('#obit').innerHTML=`<h3>🪦 In memory of ${n}</h3><p>${n}, ${st.age}, ${st.dead?'died of '+st.cause:'crossed the finish line'}. Known as a ${esc(st.job.toLowerCase())} with ${st.h>70?'suspiciously good health':st.h>35?'average health':'a medical chart longer than a novel'} and ${st.p>70?'a strangely happy outlook':'a complicated outlook'}. Survived by ${r2}.</p>`}}
-const addChat=m=>{const d=document.createElement('div');d.innerHTML=`<b>${esc(m.name)}</b> ${esc(m.body)}`;$('#chat').append(d);$('#chat').scrollTop=1e6};
-async function send(){const b=$('#cin').value.trim();if(!b||!party)return;$('#cin').value='';await run(sb.from('chat').insert({party_id:party.id,user_id:me,name:LS.name||'?',body:b}))}
+function rank(){const x=players.map(p=>({p,f:p.pub&&p.pub.final})).sort((a,b)=>(b.f?score(b.f):-1)-(a.f?score(a.f):-1));
+ $('#rank').innerHTML=x.map((y,i)=>`<div class="card pl"><span><b>${i+1}.</b> <span class="av" style="background:${y.p.color}">${y.p.emoji}</span><b>${esc(y.p.name)}</b>${y.f?`<div class="mut">${money(y.f.m)} ❤️${y.f.h} 😊${y.f.p} 🧠${y.f.s}</div>`:'<div class="mut">waiting…</div>'}</span><b class="sc">${y.f?score(y.f):'…'}</b></div>`).join('');
+ const m=mine();if(st&&m){const n=esc(m.name),s2=st.m>2e5?'a very attentive tax lawyer':st.m>0?'a modest savings account and unresolved opinions':'creditors, who will attend';
+  $('#obit').innerHTML=`<h3>🪦 In memory of ${n}</h3><p>${n}, ${st.age}, ${st.dead?'died of '+st.cause:'crossed the finish line'}. Known as a ${esc((st.job||'free spirit').toLowerCase())} with ${st.h>70?'suspiciously good health':st.h>35?'average health':'a medical chart longer than a novel'}. Survived by ${s2}${st.cast.mom?', and a mother, '+esc(st.cast.mom.n)+', who "always knew"':''}.</p>`}}
+function addChat(m){if(seenC.has(m.id))return;seenC.add(m.id);lastC=Math.max(lastC,m.id);const d=document.createElement('div');d.innerHTML=`<b>${esc(m.name)}</b> ${esc(m.body)}`;$('#chat').append(d);$('#chat').scrollTop=1e6;if($('#pan').hidden)$('#bub').classList.add('ping')}
+async function pollChat(){if(!party)return;const{data}=await sb.from('chat').select('*').eq('party_id',party.id).gt('id',lastC).order('id').limit(50);(data||[]).forEach(addChat)}
+async function send(){const b=$('#cin').value.trim();if(!b||!party)return;$('#cin').value='';const{data,error}=await sb.from('chat').insert({party_id:party.id,user_id:me,name:LS.name||'?',body:b}).select().single();if(error)return warn(error.message);addChat(data)}
+function drawEm(){$('#emojis').innerHTML=EM.map((e,i)=>`<button class="em ${i===emoji?'on':''}" data-e="${i}">${e}</button>`).join('')}
+async function init(){if(!C||C.SUPABASE_URL.includes('YOUR-'))return warn('Open config.js and paste your Supabase URL and key.');
+ sb=supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY);let s=(await sb.auth.getSession()).data.session;
+ if(!s){const x=await sb.auth.signInAnonymously();if(x.error)return warn('Turn on anonymous sign-ins in Supabase. '+x.error.message);s=x.data.session}
+ me=s.user.id;$('#name').value=LS.name||'';drawEm();show('s-lobby');run(sb.rpc('cleanup_stale'));lobby();
+ setInterval(lobby,4000);sb.channel('lobby').on('postgres_changes',{event:'*',schema:'public',table:'parties'},lobby).subscribe();setInterval(tick,250);setInterval(pollChat,3000);setInterval(sync,5000);
+ if(LS.party){const{data:p}=await sb.from('parties').select('id,status').eq('id',LS.party).maybeSingle(),{data:mm}=await sb.from('players').select('user_id').match({party_id:LS.party,user_id:me}).maybeSingle();p&&mm&&p.status!=='ended'?enter(p.id):delete LS.party}}
+async function lobby(){if($('#s-lobby').hidden)return;const{data}=await sb.from('parties').select('id,name,host_id,end_age,players(count)').eq('status','lobby').gt('created_at',new Date(Date.now()-72e5).toISOString()).order('created_at',{ascending:false}).limit(20);
+ $('#plist').innerHTML=(data||[]).map(p=>`<div class="pl"><div><b>${esc(p.name)}</b><div class="mut">${p.players[0].count}/8 players, ${p.end_age} years</div></div>${p.host_id===me?`<button class="btn sm ghost" data-c="${p.id}">Cancel</button>`:p.players[0].count>=8?'<span class="mut">Full</span>':`<button class="btn sm" data-j="${p.id}">Join</button>`}</div>`).join('')||'No open parties yet. Host one!'}
+async function join(id){const n=nm();if(!n)return warn('Pick a name first.');LS.name=n;const{data:pp}=await sb.from('parties').select('status').eq('id',id).maybeSingle();if(!pp||pp.status!=='lobby'){warn(pp?'That game already started.':'That party was cancelled.');return lobby()}const{data:pl}=await sb.from('players').select('user_id').eq('party_id',id);
+ if(pl.length>=8&&!pl.some(x=>x.user_id===me))return warn('That party is full.');
+ const{error}=await sb.from('players').upsert({party_id:id,user_id:me,name:n,emoji:EM[emoji],color:COL[emoji]});if(error)return warn(error.message);warn('');enter(id)}
+async function enter(id){LS.party=id;seenC=new Set();lastC=0;$('#chat').innerHTML='';party=(await sb.from('parties').select('*').eq('id',id).maybeSingle()).data;if(!party){delete LS.party;return}
+ ch=sb.channel('p'+id).on('postgres_changes',{event:'*',schema:'public',table:'parties',filter:'id=eq.'+id},x=>{if(x.eventType==='DELETE'){if(party&&party.host_id!==me){warn('The host cancelled the party.');setTimeout(()=>warn(''),4000)}return leave(true)}party=x.new;route()})
+ .on('postgres_changes',{event:'*',schema:'public',table:'players',filter:'party_id=eq.'+id},loadPlayers).on('postgres_changes',{event:'INSERT',schema:'public',table:'chat',filter:'party_id=eq.'+id},x=>addChat(x.new)).subscribe();
+ $('#bub').hidden=false;await loadPlayers();pollChat();route()}
+async function sync(){if(!party)return;const{data:p}=await sb.from('parties').select('*').eq('id',party.id).maybeSingle();if(!party)return;if(!p)return leave(true);if(p.status!==party.status||p.year!==party.year||p.host_id!==party.host_id||p.deadline!==party.deadline){party=p;route()}loadPlayers()}
+async function loadPlayers(){const{data}=await sb.from('players').select('*').eq('party_id',party.id).order('joined_at');players=data||[];draw()}
+function route(){if(!party)return;if(party.status==='lobby')show('s-room');else if(party.status==='playing'){show('s-game');ensure();tickYear()}else{show('s-end');ensure();finalize()}draw()}
 async function leave(gone){if(party&&!gone){if(party.host_id===me&&party.status==='lobby')await sb.from('parties').delete().eq('id',party.id);else await sb.from('players').delete().match(key())}
- if(ch)sb.removeChannel(ch);if(party)delete LS['st'+party.id];ch=party=st=ev=null;players=[];lastY=-1;delete LS.party;show('s-lobby');lobby()}
-$('#emojis').onclick=x=>{const i=x.target.dataset.e;if(i!==undefined){emoji=+i;LS.emoji=i;drawEm()}};
-$('#len').oninput=()=>$('#lenv').textContent=$('#len').value;
-$('#plist').onclick=e=>{const j=e.target.dataset.j;j&&join(j)};
-$('#mk').onclick=async()=>{const n=nm();if(!n)return say('Pick a name first.');
- const{data,error}=await sb.from('parties').insert({name:$('#pname').value.trim()||n+"'s party",host_id:me,end_age:+$('#len').value}).select().single();
- if(error)return say(error.message);join(data.id)};
-$('#start').onclick=()=>run(sb.from('parties').update({status:'playing',year:0}).eq('id',party.id));
-$('#leave').onclick=()=>leave();$('#home').onclick=()=>leave();$('#next').onclick=ready;
+ if(ch)sb.removeChannel(ch);if(party)delete LS['st'+party.id];ch=party=st=ev=dq=null;players=[];lastY=-1;delete LS.party;$('#bub').hidden=true;$('#pan').hidden=true;show('s-lobby');lobby()}
+$('#emojis').onclick=x=>{const i=x.target.dataset.e;if(i!==undefined){emoji=+i;LS.emoji=i;drawEm()}};$('#len').oninput=()=>$('#lenv').textContent=$('#len').value;
+$('#plist').onclick=e=>{const j=e.target.dataset.j,c=e.target.dataset.c;if(j)join(j);else if(c&&confirm('Cancel this party?'))run(sb.from('parties').delete().eq('id',c)).then(lobby)};
+$('#mk').onclick=async()=>{const n=nm();if(!n)return warn('Pick a name first.');const{data,error}=await sb.from('parties').insert({name:$('#pname').value.trim()||n+"'s party",host_id:me,end_age:+$('#len').value,secs:+$('#secs').value}).select().single();if(error)return warn(error.message);join(data.id)};
+$('#start').onclick=()=>run(sb.from('parties').update({status:'playing',year:0,deadline:new Date(Date.now()+((party.secs||20)+4)*1000).toISOString()}).eq('id',party.id));
+$('#leave').onclick=()=>leave();$('#cancel').onclick=()=>{if(confirm('Cancel this party for everyone?'))leave()};$('#home').onclick=()=>leave();$('#next').onclick=ready;$('#shx').onclick=closeSheet;$('#sheet').onclick=e=>{if(e.target.id==='sheet')closeSheet()};
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>open(b.dataset.t));
 $('#evc').onclick=e=>{const i=e.target.dataset.i;if(i!==undefined&&ev)pickChoice(+i)};
-$('#csend').onclick=send;$('#cin').onkeydown=e=>e.key==='Enter'&&send();
+$('#shb').onclick=e=>{if(st.dead)return;const d=e.target.dataset;if(d.ap!==undefined)apply(+d.ap);else if(d.q){st.job=null;st.inc=0;delete st.cast.boss;addLine('👋 You quit your job. Dramatically.');commit()}
+ else if(d.car){if(d.car==='b'&&st.m>=6000){st.m-=6000;st.car=true;fx({p:5});addLine('🚗 You bought a used car. You named it Kevin.');news('bought a car. 🚗')}else if(d.car==='s'){st.m+=3000;st.car=false;addLine('💸 You sold your car. Kevin will be missed.')}commit()}
+ else if(d.sp){const c=st.cast[d.sp];c.c=clamp(c.c+8);st.used['r'+d.sp]=1;fx({p:3});addLine(`❤️ You spent time with ${c.n}.`);commit()}
+ else if(d.an!==undefined)answer(+d.an);else if(d.dt)startTest();else if(d.a)doAct(d.a)};
+$('#bub').onclick=()=>{$('#pan').hidden=!$('#pan').hidden;$('#bub').classList.remove('ping')};$('#csend').onclick=send;$('#pleave').onclick=()=>{if(confirm('Leave this game?'))leave()};$('#pend').onclick=()=>{if(confirm('End the game for everyone?'))end()};$('#cin').onkeydown=e=>e.key==='Enter'&&send();
 init();
 </script></body></html>
