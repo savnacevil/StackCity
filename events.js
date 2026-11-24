@@ -1,7 +1,7 @@
 // StackCity content. Choice = [label, effects, result, optional twist [chance, effects, text]]. FIRST choice = safe auto-pick.
 // Effects: m money, h/p/s stats, inc yearly income, incd income change, job, edu.
 window.NAMES={f:["Linda","Maria","Keisha","Priya","Sofia","Dana","Rosa","Jen","Aiko","Tasha","Nora","Gwen"],m:["Dave","Marcus","Raj","Luis","Tom","Kofi","Ben","Hiro","Omar","Gus","Walt","Theo"],t:["Mrs. Patel","Mr. Okafor","Ms. Lopez","Mr. Brandt","Ms. Tanaka","Coach Riley","Mr. Finch"]};
-window.TALENTS=[["Smart 🧠",{s:15}],["Athletic 💪",{h:10}],["Charming 😏",{p:8}],["Creative 🎨",{p:5,s:5}],["Sickly 🤒",{h:-15}],["Clumsy 🤕",{h:-5,p:-3}],["Anxious 😰",{p:-10}],["Lucky 🍀",{p:6}]];
+window.TALENTS=[["Smart 🧠",{s:15}],["Athletic 💪",{h:10,l:4}],["Charming 😏",{p:8,l:8}],["Creative 🎨",{p:5,s:5}],["Sickly 🤒",{h:-15,l:-4}],["Clumsy 🤕",{h:-5,p:-3}],["Anxious 😰",{p:-10}],["Lucky 🍀",{p:6}]];
 window.TIERS=["Struggling","Working class","Middle class","Upper class","Filthy rich"];
 window.LINES=[
 [0,4,"{mom} says your first word was 'no'. Fitting."],[0,4,"{dad} tried to assemble a crib. The crib won."],[0,4,"You ate something off the floor. {mom} pretended not to see."],[0,6,"{sib1} blamed you for a mess you absolutely made."],
@@ -48,18 +48,21 @@ window.EVENTS=[
 {id:"knee",a:[35,70],t:"Your knee makes a new noise. Doctors call it 'a new sound'.",c:[["Stretch",{h:2},"Yoga. 4 minutes. Life-changing."],["Ignore it",{h:-3},"The knee now has a stage name."]]},
 {id:"hsreunion",a:[40,60],t:"Your high school reunion is coming up. You've aged. They've aged worse.",c:[["Go",{p:3,m:-100},"Everyone lies about their jobs. You too."],["Skip it",{p:-1},"The fridge was lonely, but loyal."]]},
 {id:"story",a:[55,80],t:"You become the family storyteller. Same story. Again.",c:[["Tell it again",{p:4},"The grandkids pretend to listen. Beautiful."],["Nap instead",{h:2},"Also beautiful."]]},
-{id:"cruise",a:[60,85],if:s=>s.m>=15000,t:"A cruise ad promises an 'endless buffet'. You are easily moved.",c:[["Stay home",{p:-1},"You eat cereal and watch the ocean on TV."],["Book it",{m:-8000,p:8,h:-2},"The buffet was legendary. So was the shrimp."]]}
+{id:"cruise",a:[60,85],if:s=>s.m>=15000,t:"A cruise ad promises an 'endless buffet'. You are easily moved.",c:[["Stay home",{p:-1},"You eat cereal and watch the ocean on TV."],["Book it",{m:-8000,p:8,h:-2},"The buffet was legendary. So was the shrimp."]]},
+{id:"bike",a:[8,16],t:"You wipe out on your bike in front of the whole neighborhood.",c:[["Walk it off",{h:-2,l:-3},"A scar for the story. It's shaped like Ohio."],["Cry dramatically",{p:-2,l:-1},"The ice cream truck driver felt personally responsible."]]},
+{id:"stool",a:[21,45],t:"A bar stool and your face have a disagreement.",c:[["Apologize to the stool",{l:-4,h:-2},"The stool forgave you. The nose, less so."],["Go to the ER",{m:-400,l:-2},"Stitches: $400. Story: priceless."]]}
 ];
 window.WORLD=[{t:"Recession! The economy trips over its own shoelaces.",fx:{m:-1500,p:-3}},{t:"Tech boom: everyone suddenly 'works in AI'.",fx:{m:2500,p:2}},{t:"Flu season hits everyone, including the vitamin guy.",fx:{h:-6}},{t:"A UFO parks over downtown and asks for the manager.",fx:{p:4},abs:1},{t:"Zombie outbreak! Gym memberships finally pay off.",fx:{h:-8,p:-4},abs:1}];
 window.DRIVE=[["A red octagon sign means…",["Stop","Yield","Speed up","Sale at the DMV"]],["A yellow traffic light means…",["Prepare to stop","Speed up","Honk","Close your eyes"]],["At a 4-way stop, who goes first?",["First to arrive","Biggest car","Loudest stereo","Whoever honks"]],["When should headlights be on?",["At night and in poor visibility","Only on highways","Never","When showing off"]],["A safe following distance is about…",["3 seconds","1 second","Bumper to bumper","Whatever"]],["A school bus stops with flashing red lights. You…",["Stop and wait","Pass quickly","Honk","Go around"]]];
 window.JOBS=[{t:"Dog Walker",min:14,inc:6000,s:0},{t:"Fast Food Crew",min:14,inc:9000,s:0},{t:"Retail Associate",min:16,inc:22000,s:0},{t:"Barista",min:16,inc:20000,s:10},{t:"Office Assistant",min:18,inc:34000,s:40},{t:"Electrician",min:18,inc:56000,s:45,edu:"trade"},{t:"Nurse",min:22,inc:72000,s:60,edu:"college"},{t:"Software Dev",min:22,inc:98000,s:70,edu:"college"},{t:"Lawyer",min:24,inc:130000,s:82,edu:"college"}];
 window.ACTS=[
-{id:"gym",t:"Gym",e:"💪",min:12,cost:40,fx:{h:4,p:1},once:1,say:"You hit the gym. Your muscles filed a complaint."},
+{id:"gym",t:"Gym",e:"💪",min:12,cost:40,fx:{h:4,p:1,l:1},once:1,say:"You hit the gym. Your muscles filed a complaint."},
 {id:"lib",t:"Library",e:"📚",min:5,cost:0,fx:{s:3},once:1,say:"You studied at the library. {bff} fell asleep on a book."},
 {id:"doc",t:"Doctor",e:"🩺",min:0,cost:150,fx:{h:6},once:1,say:"The doctor said 'drink more water' and charged $150."},
 {id:"fun",t:"Hang out",e:"🛝",min:8,cost:20,fx:{p:4},once:1,say:"You hung out with {bff}. Nothing happened. Perfect."},
 {id:"lot",t:"Lottery ticket",e:"🎟️",min:18,cost:5,win:[0.002,2000,"Scratch-off winner! You won $2,000!"],say:"You scratched a ticket. Hope is a business model."},
 {id:"cas",t:"Casino",e:"🎰",min:21,cost:100,win:[0.45,220,"You won big at the casino!"],say:"You gambled $100 at the casino."},
+{id:"surg",t:"Cosmetic procedure",e:"💉",min:18,cost:5000,fx:{l:12},once:1,risk:[0.2,{l:-15,p:-5},"It went badly. Your face now has opinions."],say:"You got a cosmetic procedure. Bold."},
 {id:"kar",t:"Karaoke",e:"🎤",min:16,cost:30,fx:{p:5},once:1,say:"You sang karaoke with {bff}. The neighbors filed a report."},
 {id:"vol",t:"Volunteer",e:"🤝",min:12,cost:0,fx:{p:3,s:1},once:1,say:"You volunteered. Someone called you 'a good egg'."},
 {id:"ther",t:"Therapy",e:"🛋️",min:18,cost:120,fx:{p:6},once:1,say:"Therapy: you talked about {mom} for 50 minutes."},
