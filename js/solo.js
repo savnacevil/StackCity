@@ -37,7 +37,7 @@ function buy(id){const i=SHOP.find(x=>x.id===id);if(!i||META.un[id]||META.pts<i.
 function bookView(){sub('Life book',BOOK.length?BOOK.map(r=>`<div class="card"><b>${r.e} ${esc(r.n)}, ${r.age}</b> <span class="mut">· score ${r.sc} · ${money(r.m)} · ${esc(r.job)}</span><p>${esc(r.obit)}</p><div class="mut">${r.ch?esc(r.ch)+' · ':''}+${r.earned} pts</div></div>`).join(''):'<p class="mut">No lives yet. Go live one!</p>')}
 function boot(){$('#go-online').onclick=startOnline;$('#go-solo').onclick=soloMenu;$('#l-home').onclick=home;$('#s-back').onclick=home;$('#subx').onclick=soloMenu;
  $('#s-new').onclick=()=>perkPick(null);$('#s-cont').onclick=continueLife;$('#s-ret').onclick=()=>{if(confirm('End your current life now?')){continueLife();soloEnd('retirement')}};
- $('#s-chal').onclick=chalView;$('#s-shop').onclick=shopView;$('#s-book').onclick=bookView;$('#gx').onclick=()=>{if(MODE==='solo'){save();soloMenu()}};
+ $('#tipx').onclick=()=>{LS.tipdone=1;$('#tip').hidden=true};$('#s-chal').onclick=chalView;$('#s-shop').onclick=shopView;$('#s-book').onclick=bookView;$('#gx').onclick=()=>{if(MODE==='solo'){save();soloMenu()}};
  $('#semojis').onclick=x=>{const e=x.target.dataset.e;if(e){LS.avatar=e;drawAv()}};
  $('#subb').onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
   if(d.pk!==undefined)startLife(pendChal,d.pk||null);else if(d.ch)perkPick(d.ch);else if(d.buy)buy(d.buy);else if(d.go==='new')perkPick(null);else if(d.go==='menu')soloMenu();else if(d.go==='book')bookView()};
